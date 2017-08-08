@@ -186,3 +186,11 @@ alluxio.underfs.hdfs.prefixes=hdfs://,wasb://
 # alluxio.user.file.readtype.default=CACHE_PROMOTE
 # alluxio.user.file.writetype.default=MUST_CACHE
 ``` 
+copy core-site.xml to alluxio conf directory
+
+``` 
+cp /etc/hadoop/conf/core-site.xml .
+mv core-site.xml conf/
+``` 
+
+Copy the binaries to all the worker nodes
