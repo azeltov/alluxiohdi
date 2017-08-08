@@ -132,4 +132,8 @@ wn34-maxluk
 Add hn0-maxluk to conf/masters file
 ``` 
 sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ vi conf/masters
+sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ cp conf/alluxio-site.properties.template conf/alluxio-site.properties
+
 ``` 
+
+Bump down yarn to 85g. Alluxio is using the other 15G
