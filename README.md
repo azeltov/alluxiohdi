@@ -15,13 +15,17 @@ for i in wn{3..38}-maxluk; do ssh-copy-id $i;done
 
 ssh-copy-id wn44-maxluk
 ssh wn44-maxluk
+
+ssh-copy-id hn0-maxluk
+ssh hn0-maxluk
+
 ``` 
 
 Request the commercial license 
 
 https://alluxio.com/account/#download-manager
 
-Setup alluxio
+## Setup alluxio
 ``` 
 mkdir alluxio
 cd alluxio/
@@ -194,3 +198,22 @@ mv core-site.xml conf/
 ``` 
 
 Copy the binaries to all the worker nodes
+
+``` 
+./bin/alluxio copyDir /home/sshuser/alluxio/alluxio-1.5.0-hadoop-2.7
+``` 
+
+## Start alluxio:
+``` 
+
+./bin/alluxio format
+./bin/alluxio-start.sh
+./bin/alluxio-start.sh all
+``` 
+## Troubleshoot alluxio:
+
+ps -ef | grep alluxio
+jps
+cd logs/
+vi master.out
+
