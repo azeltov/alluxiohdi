@@ -22,7 +22,7 @@ Request the commercial license
 https://alluxio.com/account/#download-manager
 
 Setup alluxio
-
+``` 
 mkdir alluxio
 cd alluxio/
 wget http://downloads.alluxio.org/downloads/files/1.5.0/alluxio-1.5.0-hadoop-2.7-bin.tar.gz
@@ -127,3 +127,9 @@ wn31-maxluk
 wn32-maxluk
 wn33-maxluk
 wn34-maxluk
+``` 
+
+Add hn0-maxluk to conf/masters file
+``` 
+sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ vi conf/masters
+``` 
