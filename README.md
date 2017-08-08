@@ -211,9 +211,9 @@ Copy the binaries to all the worker nodes
 ./bin/alluxio-start.sh all
 ``` 
 ## Troubleshoot alluxio:
-
+``` 
 ps -ef | grep alluxio
 jps
 cd logs/
 vi master.out
-
+``` 
