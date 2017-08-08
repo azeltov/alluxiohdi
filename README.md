@@ -137,3 +137,52 @@ sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ cp conf/alluxio-site.prop
 ``` 
 
 Bump down yarn to 85g. Alluxio is using the other 15G
+``` 
+sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ vi conf/alluxio-env.sh
+ALLUXIO_MASTER_HOSTNAME=${ALLUXIO_MASTER_HOSTNAME:-"hn0-maxluk"}
+ALLUXIO_WORKER_MEMORY_SIZE=${ALLUXIO_WORKER_MEMORY_SIZE:-"15360MB"}
+ALLUXIO_RAM_FOLDER=${ALLUXIO_RAM_FOLDER:-"/mnt/ramdisk"}
+
+export ALLUXIO_CLASSPATH=/usr/hdp/2.6.1.3-4/hadoop/client/azure-storage-4.2.0.jar:/usr/hdp/2.6.1.3-4/hadoop/hadoop-azure-2.7.3.2.6.1.3-4.jar
+``` 
+
+Specify the wasb address alluxio.underfs.address and alluxio.underfs.hdfs.prefixes
+``` 
+
+sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ cat conf/alluxio-site.properties
+#
+# The Alluxio Open Foundation licenses this work under the Apache License, version 2.0
+# (the "License"). You may not use this work except in compliance with the License, which is
+# available at www.apache.org/licenses/LICENSE-2.0
+#
+# This software is distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied, as more fully set forth in the License.
+#
+# See the NOTICE file distributed with this work for information regarding copyright ownership.
+#
+
+# Site specific configuration properties for Alluxio
+# Details about all configuration properties http://www.alluxio.org/documentation/en/Configuration-Settings.html
+
+# Common properties
+# alluxio.master.hostname=localhost
+alluxio.underfs.address=wasb://maxluk-alluxio-2017-08-02t17-39-40-247z@maxluksparkeus.blob.core.windows.net/alluxio
+
+alluxio.underfs.hdfs.prefixes=hdfs://,wasb://
+
+#${alluxio.work.dir}/underFSStorage
+
+# Security properties
+# alluxio.security.authorization.permission.enabled=true
+# alluxio.security.authentication.type=SIMPLE
+
+# Worker properties
+# alluxio.worker.memory.size=1GB
+# alluxio.worker.tieredstore.levels=1
+# alluxio.worker.tieredstore.level0.alias=MEM
+# alluxio.worker.tieredstore.level0.dirs.path=/mnt/ramdisk
+
+# User properties
+# alluxio.user.file.readtype.default=CACHE_PROMOTE
+# alluxio.user.file.writetype.default=MUST_CACHE
+``` 
