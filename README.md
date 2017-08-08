@@ -1,4 +1,4 @@
-# alluxiohdi
+# Alluxio setup on hdinsight 3.6 (spark 2.x)
 
 
 ## Setup Passwordless SSH on all Nodes except zoo-keeper
