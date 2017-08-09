@@ -235,3 +235,44 @@ vi conf/alluxio-site.properties
 ./bin/alluxio format
 cp ~/alluxio/alluxio-enterprise-license.json ~/alluxio/alluxio-enterprise-1.5.0-hadoop-2.7/license.json
 ``` 
+
+Change alluxio.underfs.address=${alluxio.work.dir}/underFSStorage
+
+``` 
+sshuser@hn0-maxluk:~/alluxio/alluxio-enterprise-1.5.0-hadoop-2.7$ cat conf/alluxio-site.properties
+#
+# The Alluxio Open Foundation licenses this work under the Apache License, version 2.0
+# (the "License"). You may not use this work except in compliance with the License, which is
+# available at www.apache.org/licenses/LICENSE-2.0
+#
+# This software is distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+# either express or implied, as more fully set forth in the License.
+#
+# See the NOTICE file distributed with this work for information regarding copyright ownership.
+#
+
+# Site specific configuration properties for Alluxio
+# Details about all configuration properties http://www.alluxio.org/documentation/en/Configuration-Settings.html
+
+# Common properties
+# alluxio.master.hostname=localhost
+#alluxio.underfs.address=wasb://maxluk-alluxio-2017-08-02t17-39-40-247z@maxluksparkeus.blob.core.windows.net/alluxio
+alluxio.underfs.address=${alluxio.work.dir}/underFSStorage
+alluxio.underfs.hdfs.prefixes=hdfs://,wasb://
+
+#${alluxio.work.dir}/underFSStorage
+
+# Security properties
+# alluxio.security.authorization.permission.enabled=true
+# alluxio.security.authentication.type=SIMPLE
+
+# Worker properties
+# alluxio.worker.memory.size=1GB
+# alluxio.worker.tieredstore.levels=1
+# alluxio.worker.tieredstore.level0.alias=MEM
+# alluxio.worker.tieredstore.level0.dirs.path=/mnt/ramdisk
+
+# User properties
+# alluxio.user.file.readtype.default=CACHE_PROMOTE
+# alluxio.user.file.writetype.default=MUST_CACHE
+``` 
