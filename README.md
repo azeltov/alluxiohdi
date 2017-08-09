@@ -210,6 +210,9 @@ Copy the binaries to all the worker nodes
 ./bin/alluxio-start.sh all
 ``` 
 ## Troubleshoot alluxio:
+
+Forums: https://groups.google.com/forum/#%21forum/alluxio-users
+
 ``` 
 ps -ef | grep alluxio
 jps
@@ -276,3 +279,10 @@ alluxio.underfs.hdfs.prefixes=hdfs://,wasb://
 # alluxio.user.file.readtype.default=CACHE_PROMOTE
 # alluxio.user.file.writetype.default=MUST_CACHE
 ``` 
+Use SSH Tunneling to access Alluxio
+
+https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-linux-ambari-ssh-tunnel
+
+Access the alluxio web portal:
+http://hn0-maxluk:19999/workers
+
