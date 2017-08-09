@@ -216,3 +216,22 @@ jps
 cd logs/
 vi master.out
 ``` 
+
+## Enterprise Alluxio Setup
+``` 
+tar -xvf alluxio-enterprise-1.5.0-hadoop-2.7.tar.gz
+cp alluxio-1.5.0-hadoop-2.7/conf/workers alluxio-enterprise-1.5.0-hadoop-2.7/conf/
+vi alluxio-enterprise-1.5.0-hadoop-2.7/conf/workers
+cp alluxio-1.5.0-hadoop-2.7/conf/masters alluxio-enterprise-1.5.0-hadoop-2.7/conf/
+cp alluxio-1.5.0-hadoop-2.7/conf/alluxio-env.sh alluxio-enterprise-1.5.0-hadoop-2.7/conf/
+cp alluxio-1.5.0-hadoop-2.7/conf/alluxio-site.properties alluxio-enterprise-1.5.0-hadoop-2.7/conf/
+cp alluxio-1.5.0-hadoop-2.7/conf/core-site.bckup alluxio-enterprise-1.5.0-hadoop-2.7/conf/
+mv alluxio-enterprise-1.5.0-hadoop-2.7/conf/core-site.bckup alluxio-enterprise-1.5.0-hadoop-2.7/conf/core-site.xml
+cd alluxio-enterprise-1.5.0-hadoop-2.7/
+
+ssh wn0-maxluk
+vi conf/alluxio-site.properties
+./bin/alluxio copyDir /home/sshuser/alluxio/alluxio-enterprise-1.5.0-hadoop-2.7
+./bin/alluxio format
+cp ~/alluxio/alluxio-enterprise-license.json ~/alluxio/alluxio-enterprise-1.5.0-hadoop-2.7/license.json
+``` 
