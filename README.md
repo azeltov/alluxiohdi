@@ -323,6 +323,8 @@ https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md
   364  vi conf/hadoop.conf
 ``` 
 
+###  Configure hadoop.conf
+
 ``` 
 
 sshuser@hn0-maxluk:~/git/HiBench$ cat conf/hadoop.conf
@@ -345,10 +347,11 @@ hibench.hadoop.release    hdp
 hibench.hdfs.data.dir /hibench
 ``` 
   
+###  Configure spark.conf
+```  
   365  cp conf/spark.conf.template conf/spark.conf
   366  vi conf/spark.conf
 
-```  
 sshuser@hn0-maxluk:~/git/HiBench$ cat conf/spark.conf
 # Spark home
 hibench.spark.home     /usr/hdp/2.6.1.3-4/spark2
