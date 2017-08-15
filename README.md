@@ -302,7 +302,11 @@ http://hn0-maxluk:19999/workers
    export PATH=$PATH:$M2_HOME/bin
   
   378  source ~/.bash_profile
-```   
+```
+## TPCDS Benchmarks - Microsoft:
+
+https://github.com/dharmeshkakadia/tpcds-datagen-as-hive-query
+
 ## HiBench setup
 
 https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md
