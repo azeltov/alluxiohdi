@@ -371,3 +371,6 @@ spark.eventLog.enabled  true
   370   bin/workloads/micro/wordcount/prepare/prepare.sh
   371  bin/workloads/micro/wordcount/spark/run.sh
 ``` 
+You should now see jobs populate in spark history server:
+
+https://maxluk-alluxio.azurehdinsight.net/sparkhistory/?showIncomplete=false
