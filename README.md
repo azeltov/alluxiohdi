@@ -286,3 +286,85 @@ https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-linux-ambari-ssh-tunn
 Access the alluxio web portal:
 http://hn0-maxluk:19999/workers
 
+#Performance Benchmarks
+## Maven Setup
+``` 
+
+  368  mkdir tools
+  369  cd tools/
+  370  wget http://apache.mesi.com.ar/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+  371  tar -xvf apache-maven-3.5.0-bin.tar.gz
+  372  ll
+  373  cd apache-maven-3.5.0/
+  377  vi ~/.bash_profile
+  
+   M2_HOME=/home/sshuser/tools/apache-maven-3.5.0
+   export PATH=$PATH:$M2_HOME/bin
+  
+  378  source ~/.bash_profile
+```   
+## HiBench setup
+
+https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md
+
+``` 
+ 362  git clone https://github.com/intel-hadoop/HiBench
+  363  cd HiBench/
+  374  ll
+  375  cd bin/
+  376  pwd
+
+  379  cd ~/git/HiBench/
+  380  mvn -Dspark=2.1 -Dscala=2.11 clean package
+360  cd git/HiBench/
+  361  ll
+  362  ls
+  363  cp conf/hadoop.conf.template conf/hadoop.conf
+  364  vi conf/hadoop.conf
+``` 
+
+``` 
+
+sshuser@hn0-maxluk:~/git/HiBench$ cat conf/hadoop.conf
+# Hadoop home
+hibench.hadoop.home    /usr/hdp/2.6.1.3-4/hadoop
+
+# The path of hadoop executable
+hibench.hadoop.executable     ${hibench.hadoop.home}/bin/hadoop
+
+# Hadoop configraution directory
+hibench.hadoop.configure.dir  /etc/hadoop/conf
+
+# The root HDFS path to store HiBench data
+hibench.hdfs.master       hdfs://hn0-maxluk.4ojp4coykebetnesfwz4dikn1f.cx.internal.cloudapp.net:8020
+
+
+# Hadoop release provider. Supported value: apache, cdh5, hdp
+hibench.hadoop.release    hdp
+
+hibench.hdfs.data.dir /hibench
+``` 
+  
+  365  cp conf/spark.conf.template conf/spark.conf
+  366  vi conf/spark.conf
+
+```  
+sshuser@hn0-maxluk:~/git/HiBench$ cat conf/spark.conf
+# Spark home
+hibench.spark.home     /usr/hdp/2.6.1.3-4/spark2
+
+# Spark master
+#   standalone mode: spark://xxx:7077
+#   YARN mode: yarn-client
+hibench.spark.master    yarn-client
+
+spark.eventLog.dir      wasb:///hdp/spark2-events
+spark.history.fs.logDirectory   wasb:///hdp/spark2-events
+spark.eventLog.enabled  true
+
+  367   bin/workloads/micro/wordcount/prepare/prepare.sh
+  368  vi conf/hadoop.conf
+  369  vi conf/hadoop.conf
+  370   bin/workloads/micro/wordcount/prepare/prepare.sh
+  371  bin/workloads/micro/wordcount/spark/run.sh
+``` 
