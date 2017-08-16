@@ -286,8 +286,7 @@ https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-linux-ambari-ssh-tunn
 Access the alluxio web portal:
 http://hn0-maxluk:19999/workers
 
-##
-Mount Wasb Store
+## Mount Wasb Store
 `./bin/alluxio fs mount /hdi wasb://maxluk-alluxio-2017-08-02t17-39-40-247z@maxluksparkeus.blob.core.windows.net/alluxio/`
 
 # Performance Benchmarks
