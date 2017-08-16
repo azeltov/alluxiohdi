@@ -140,17 +140,21 @@ sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ cp conf/alluxio-site.prop
 ``` 
 
 Bump down yarn to 85g. Alluxio is using the other 15G
+
+### alluxio-env.sh
 ``` 
 sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ vi conf/alluxio-env.sh
 ALLUXIO_MASTER_HOSTNAME=${ALLUXIO_MASTER_HOSTNAME:-"hn0-maxluk"}
 ALLUXIO_WORKER_MEMORY_SIZE=${ALLUXIO_WORKER_MEMORY_SIZE:-"15360MB"}
 ALLUXIO_RAM_FOLDER=${ALLUXIO_RAM_FOLDER:-"/mnt/ramdisk"}
 
-ALLUXIO_CLASSPATH=/usr/hdp/2.6.1.3-4/hadoop/client/azure-storage-4.2.0.jar:/usr/hdp/2.6.1.3-4/hadoop/hadoop-azure-2.7.3.2.6.1.3-4.jar:/usr/hdp/2.6.1.3-4/hadoop/client/azure-keyvault-core-0.8.0.jar
+#ALLUXIO_CLASSPATH=/usr/hdp/2.6.1.3-4/hadoop/client/azure-storage-4.2.0.jar:/usr/hdp/2.6.1.3-4/hadoop/hadoop-azure-2.7.3.2.6.1.3-4.jar:/usr/hdp/2.6.1.3-4/hadoop/client/azure-keyvault-core-0.8.0.jar
 ``` 
 
 Specify the wasb address alluxio.underfs.address and alluxio.underfs.hdfs.prefixes
 ``` 
+
+### alluxio-site.properties
 
 sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ cat conf/alluxio-site.properties
 #
@@ -189,14 +193,15 @@ alluxio.underfs.hdfs.prefixes=hdfs://,wasb://
 # alluxio.user.file.readtype.default=CACHE_PROMOTE
 # alluxio.user.file.writetype.default=MUST_CACHE
 ``` 
-copy core-site.xml to alluxio conf directory
+
+### copy core-site.xml to alluxio conf directory
 
 ``` 
 cp /etc/hadoop/conf/core-site.xml .
 mv core-site.xml conf/
 ``` 
 
-Copy the binaries to all the worker nodes
+### Copy the binaries to all the worker nodes
 
 ``` 
 ./bin/alluxio copyDir /home/sshuser/alluxio/alluxio-1.5.0-hadoop-2.7
