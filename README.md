@@ -387,6 +387,29 @@ You should now see jobs populate in spark history server:
 https://maxluk-alluxio.azurehdinsight.net/sparkhistory/?showIncomplete=false
 
 
-# Configure S3 Understore
-./bin/alluxio fs mount  --option aws.accessKeyId=xxxx --option aws.secretKey=xxxxx /s3data s3a://alluxio-demo/data
+# S3
 
+## Configure S3 Understore
+./bin/alluxio fs mount  --option aws.accessKeyId=xxxx --option aws.secretKey=xxxxx /s3data s3a://azeltov-alluxio
+
+## Alluxio Operations
+``` 
+
+sshuser@hn0-maxluk:~/alluxio/alluxio-dev2$ ./bin/alluxio fs ls /s3data
+drwx------     alex.zeltov    alex.zeltov    0         08-16-2017 17:48:48:563  Directory      /s3data/test
+sshuser@hn0-maxluk:~/alluxio/alluxio-dev2$ ./bin/alluxio fs ls /s3data/test
+-rwx------     alex.zeltov    alex.zeltov    118320    08-16-2017 17:48:55:397  Not In Memory  /s3data/test/violations.csv
+sshuser@hn0-maxluk:~/alluxio/alluxio-dev2$ ./bin/alluxio fs cp /s3data/test/violations.csv /hdi/
+Copied /s3data/test/violations.csv to /hdi/violations.csv
+sshuser@hn0-maxluk:~/alluxio/alluxio-dev2$ ./bin/alluxio fs ls /hdi
+drwxrwxrwx                                   0         08-16-2017 16:46:55:117  Directory      /hdi/Dockerfile
+drw-r--r--     sshuser        sshuser        0         08-16-2017 16:46:55:129  Directory      /hdi/alluxio-site.properties
+-rw-r--r--     sshuser        sshuser        118320    08-16-2017 17:50:35:002  In Memory      /hdi/violations.csv
+sshuser@hn0-maxluk:~/alluxio/alluxio-dev2$ ./bin/alluxio fs persist /hdi/violations.csv
+persisted file /hdi/violations.csv with size 118320
+sshuser@hn0-maxluk:~/alluxio/alluxio-dev2$ ./bin/alluxio fs ls /hdi
+drwxrwxrwx                                   0         08-16-2017 16:46:55:117  Directory      /hdi/Dockerfile
+drw-r--r--     sshuser        sshuser        0         08-16-2017 16:46:55:129  Directory      /hdi/alluxio-site.properties
+-rw-r--r--     sshuser        sshuser        118320    08-16-2017 17:50:35:002  In Memory      /hdi/violations.csv
+
+``` 
