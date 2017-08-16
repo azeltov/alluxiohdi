@@ -146,7 +146,7 @@ ALLUXIO_MASTER_HOSTNAME=${ALLUXIO_MASTER_HOSTNAME:-"hn0-maxluk"}
 ALLUXIO_WORKER_MEMORY_SIZE=${ALLUXIO_WORKER_MEMORY_SIZE:-"15360MB"}
 ALLUXIO_RAM_FOLDER=${ALLUXIO_RAM_FOLDER:-"/mnt/ramdisk"}
 
-export ALLUXIO_CLASSPATH=/usr/hdp/2.6.1.3-4/hadoop/client/azure-storage-4.2.0.jar:/usr/hdp/2.6.1.3-4/hadoop/hadoop-azure-2.7.3.2.6.1.3-4.jar:/usr/hdp/2.6.1.3-4/hadoop/client/azure-keyvault-core-0.8.0.jar
+ALLUXIO_CLASSPATH=/usr/hdp/2.6.1.3-4/hadoop/client/azure-storage-4.2.0.jar:/usr/hdp/2.6.1.3-4/hadoop/hadoop-azure-2.7.3.2.6.1.3-4.jar:/usr/hdp/2.6.1.3-4/hadoop/client/azure-keyvault-core-0.8.0.jar
 ``` 
 
 Specify the wasb address alluxio.underfs.address and alluxio.underfs.hdfs.prefixes
