@@ -150,11 +150,9 @@ ALLUXIO_RAM_FOLDER=${ALLUXIO_RAM_FOLDER:-"/mnt/ramdisk"}
 
 #ALLUXIO_CLASSPATH=/usr/hdp/2.6.1.3-4/hadoop/client/azure-storage-4.2.0.jar:/usr/hdp/2.6.1.3-4/hadoop/hadoop-azure-2.7.3.2.6.1.3-4.jar:/usr/hdp/2.6.1.3-4/hadoop/client/azure-keyvault-core-0.8.0.jar
 ``` 
-
+### alluxio-site.properties
 Specify the wasb address alluxio.underfs.address and alluxio.underfs.hdfs.prefixes
 ``` 
-
-### alluxio-site.properties
 
 sshuser@hn0-maxluk:~/alluxio/alluxio-1.5.0-hadoop-2.7$ cat conf/alluxio-site.properties
 #
