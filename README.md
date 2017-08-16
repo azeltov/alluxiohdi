@@ -385,3 +385,8 @@ spark.eventLog.enabled  true
 You should now see jobs populate in spark history server:
 
 https://maxluk-alluxio.azurehdinsight.net/sparkhistory/?showIncomplete=false
+
+
+# Configure S3 Understore
+./bin/alluxio fs mount  --option aws.accessKeyId=xxxx --option aws.secretKey=xxxxx /s3data s3a://alluxio-demo/data
+
