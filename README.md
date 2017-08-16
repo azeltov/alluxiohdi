@@ -261,7 +261,8 @@ sshuser@hn0-maxluk:~/alluxio/alluxio-enterprise-1.5.0-hadoop-2.7$ cat conf/allux
 # alluxio.master.hostname=localhost
 #alluxio.underfs.address=wasb://maxluk-alluxio-2017-08-02t17-39-40-247z@maxluksparkeus.blob.core.windows.net/alluxio
 alluxio.underfs.address=${alluxio.work.dir}/underFSStorage
-alluxio.underfs.hdfs.prefixes=hdfs://,wasb://
+#alluxio.underfs.hdfs.prefixes=hhdfs://,glusterfs:///,maprfs:///,wasb://
+alluxio.underfs.hdfs.prefixes=hhdfs://,glusterfs:///,maprfs:///
 
 #${alluxio.work.dir}/underFSStorage
 
