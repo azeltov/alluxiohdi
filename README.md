@@ -413,3 +413,15 @@ drw-r--r--     sshuser        sshuser        0         08-16-2017 16:46:55:129  
 -rw-r--r--     sshuser        sshuser        118320    08-16-2017 17:50:35:002  In Memory      /hdi/violations.csv
 
 ``` 
+
+#Quick Spark Test
+```
+cd /usr/hdp/cuurent/spark-client
+
+./bin/spark-shell --jars /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar, /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/hadoop/alluxio-enterprise-1.5.0-E-hadoop-client.jar --conf spark.driver.extraClassPath= /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar --conf spark.executor.extraClassPath= /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar --conf spark.app.name=alluxio-enterprise --conf spark.master=yarn --conf spark.submit.deployMode=client 
+
+#In Scala
+
+> val alluxioFile = sc.textFile("alluxio://hn0-maxluk:19998/hdi/ambari.properties.1")
+> alluxioFile.count()
+```
