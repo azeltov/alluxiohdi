@@ -425,8 +425,10 @@ cd /usr/hdp/cuurent/spark-client
 > val alluxioFile = sc.textFile("alluxio://hn0-maxluk:19998/hdi/ambari.properties.1")
 > alluxioFile.count()
 ```
+# Alluxio and HiBench final configuration to get it to work.
 
 Add  spark.driver.extraClassPath and spark.executor.extraClassPath 
+
 ```
 sshuser@hn0-maxluk:vi ~/git/HiBenchAlluxio/conf/spark.conf
 
