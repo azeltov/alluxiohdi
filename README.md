@@ -414,7 +414,7 @@ drw-r--r--     sshuser        sshuser        0         08-16-2017 16:46:55:129  
 
 ``` 
 
-#Quick Spark Test
+# Quick Spark Test
 ```
 cd /usr/hdp/cuurent/spark-client
 
