@@ -414,7 +414,7 @@ drw-r--r--     sshuser        sshuser        0         08-16-2017 16:46:55:129  
 
 ``` 
 
-# Quick Spark Test
+## Quick Spark Test
 ```
 cd /usr/hdp/cuurent/spark-client
 
@@ -425,3 +425,64 @@ cd /usr/hdp/cuurent/spark-client
 > val alluxioFile = sc.textFile("alluxio://hn0-maxluk:19998/hdi/ambari.properties.1")
 > alluxioFile.count()
 ```
+
+Add  spark.driver.extraClassPath and spark.executor.extraClassPath 
+```
+sshuser@hn0-maxluk:vi ~/git/HiBenchAlluxio/conf/spark.conf
+
+# Spark home
+hibench.spark.home     /usr/hdp/2.6.1.3-4/spark2
+
+# Spark master
+#   standalone mode: spark://xxx:7077
+#   YARN mode: yarn-client
+hibench.spark.master    yarn-client
+
+spark.eventLog.dir      wasb:///hdp/spark2-events
+spark.history.fs.logDirectory   wasb:///hdp/spark2-events
+spark.eventLog.enabled  true
+
+# executor number and cores when running on Yarn
+hibench.yarn.executor.num     2
+hibench.yarn.executor.cores   4
+
+# executor and driver memory in standalone & YARN mode
+spark.executor.memory  4g
+spark.driver.memory    4g
+
+# set spark parallelism property according to hibench's parallelism value
+spark.default.parallelism     ${hibench.default.map.parallelism}
+
+# set spark sql's default shuffle partitions according to hibench's parallelism value
+spark.sql.shuffle.partitions  ${hibench.default.shuffle.parallelism}
+
+spark.driver.extraClassPath     /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar
+spark.executor.extraClassPath   /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar
+```
+
+Configure HiBenchAlluxio to add the libjars
+```
+vi bin/functions/workload_functions.sh
+
+function run_hadoop_job(){
+...
+local CMD="${HADOOP_EXECUTABLE} --config ${HADOOP_CONF_DIR} jar $job_jar $job_name  -libjars /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/hadoop/alluxio-enterprise-1.5.0-E-hadoop-client.jar $tail_arguments"
+    echo -e "${BGreen}Submit MapReduce Job: ${Green}$CMD${Color_Off}"
+```
+
+Modfify Ambari HDFS hadoop-env and restart Ambari:
+```
+
+HADOOP_CLASSPATH=${HADOOP_CLASSPATH}${JAVA_JDBC_LIBS}:${MAPREDUCE_LIBS}:/home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/hadoop/alluxio-enterprise-1.5.0-E-hadoop-client.jar
+
+if [ -d "/usr/lib/tez" ]; then
+  export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:/home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/hadoop/alluxio-enterprise-1.5.0-E-hadoop-client.jar:/usr/lib/tez/*:/usr/lib/tez/lib/*:/etc/tez/conf
+fi
+```
+
+Check haoop classpath: 
+```
+hadoop classpath
+```
+
+
