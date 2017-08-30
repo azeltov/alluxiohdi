@@ -487,4 +487,25 @@ Check haoop classpath:
 hadoop classpath
 ```
 
+# TeraGen and TeraSort Test
 
+Here is how we ran it:
+
+```cd /home/sshuser/git//HiBenchAlluxio/
+#vi bin/functions/workload_functions.sh
+
+vi conf/spark.conf
+
+#change hibench.scale.profile from gigantic (320GB) to huge (32GB) as defined in conf/workloads/micro/wordcount.conf
+vi conf/hibench.conf 
+
+#ensure that only micro.terasort is only run
+vi conf/benchmarks.lst
+#This is just to get the command, and to generate input.  If we already have input then no need to run
+./bin/run_all.sh
+
+#Here is a sample run
+/usr/hdp/2.6.1.3-4/spark2/bin/spark-submit  --properties-file /home/sshuser/git/HiBenchAlluxio/report/terasort/spark/conf/sparkbench/spark.conf --class com.intel.hibench.sparkbench.micro.ScalaTeraSort --master yarn-client --num-executors 159 --executor-cores 4 --executor-memory 19G /home/sshuser/git/HiBenchAlluxio/sparkbench/assembly/target/sparkbench-assembly-6.1-SNAPSHOT-dist.jar alluxio://hn0-maxluk:19998/HiBench/Terasort/Input alluxio://hn0-maxluk:19998/HiBench/Terasort/Output2
+
+vi report/terasort/spark/bench.log
+```
