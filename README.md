@@ -339,6 +339,7 @@ https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md
 ``` 
 
 sshuser@hn0-maxluk:~/git/HiBench$ cat conf/hadoop.conf
+
 # Hadoop home
 hibench.hadoop.home    /usr/hdp/2.6.1.3-4/hadoop
 
@@ -348,14 +349,20 @@ hibench.hadoop.executable     ${hibench.hadoop.home}/bin/hadoop
 # Hadoop configraution directory
 hibench.hadoop.configure.dir  /etc/hadoop/conf
 
-# The root HDFS path to store HiBench data
-hibench.hdfs.master       hdfs://hn0-maxluk.4ojp4coykebetnesfwz4dikn1f.cx.internal.cloudapp.net:8020
-
+# The root HDFS path to store HiBench datahibench.hdfs.master
+#hibench.hdfs.master       hdfs://hn0-maxluk.4ojp4coykebetnesfwz4dikn1f.cx.internal.cloudapp.net:8020
+#hibench.hdfs.master    wasb://maxluk-alluxio-2017-08-02t17-39-40-247z@maxluksparkeus.blob.core.windows.net
+hibench.hdfs.master alluxio://hn0-maxluk:19998
 
 # Hadoop release provider. Supported value: apache, cdh5, hdp
 hibench.hadoop.release    hdp
 
 hibench.hdfs.data.dir /hibench
+
+# ALLUXIO ADD
+alluxio.user.file.readtype.default      CACHE_PROMOTE
+alluxio.user.file.writetype.default     THROUGH
+# ALLUXIO END
 ``` 
   
 ###  Configure spark.conf
