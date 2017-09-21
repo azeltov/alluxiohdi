@@ -379,10 +379,52 @@ hibench.spark.home     /usr/hdp/2.6.1.3-4/spark2
 #   YARN mode: yarn-client
 hibench.spark.master    yarn-client
 
+# ALLUXIO ADD
+alluxio.user.file.readtype.default      CACHE_PROMOTE
+alluxio.user.file.writetype.default     ASYNC_THROUGH
+# ALLUXIO END
+
 spark.eventLog.dir      wasb:///hdp/spark2-events
 spark.history.fs.logDirectory   wasb:///hdp/spark2-events
 spark.eventLog.enabled  true
 
+# ALLUXIO ADD
+alluxio.user.file.readtype.default      CACHE_PROMOTE
+alluxio.user.file.writetype.default     ASYNC_THROUGH
+# ALLUXIO END
+
+# executor number and cores when running on Yarn
+#spark.executor.instances = hibench.yarn.executor.num
+hibench.yarn.executor.num     159
+#spark.executor.instances       159
+
+#spark.executor.cores=hibench.yarn.executor.cores
+hibench.yarn.executor.cores   4
+
+# executor and driver memory in standalone & YARN mode
+#spark.executor.memory  4g
+#spark.driver.memory    4g
+
+spark.executor.memory   19G
+#spark.yarn.executor.memoryOverhead     2048
+
+spark.driver.memory     6098m
+spark.driver.cores      6
+
+spark.locality.wait 100000
+
+# set spark parallelism property according to hibench's parallelism value
+spark.default.parallelism     ${hibench.default.map.parallelism}
+
+# set spark sql's default shuffle partitions according to hibench's parallelism value
+spark.sql.shuffle.partitions  ${hibench.default.shuffle.parallelism}
+
+spark.driver.extraClassPath     /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar
+spark.executor.extraClassPath   /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar
+
+```
+### Do a Quick test
+```
   367   bin/workloads/micro/wordcount/prepare/prepare.sh
   368  vi conf/hadoop.conf
   369  vi conf/hadoop.conf
@@ -434,40 +476,7 @@ cd /usr/hdp/cuurent/spark-client
 ```
 # Alluxio and HiBench final configuration to get it to work.
 
-Add  spark.driver.extraClassPath and spark.executor.extraClassPath 
 
-```
-sshuser@hn0-maxluk:vi ~/git/HiBenchAlluxio/conf/spark.conf
-
-# Spark home
-hibench.spark.home     /usr/hdp/2.6.1.3-4/spark2
-
-# Spark master
-#   standalone mode: spark://xxx:7077
-#   YARN mode: yarn-client
-hibench.spark.master    yarn-client
-
-spark.eventLog.dir      wasb:///hdp/spark2-events
-spark.history.fs.logDirectory   wasb:///hdp/spark2-events
-spark.eventLog.enabled  true
-
-# executor number and cores when running on Yarn
-hibench.yarn.executor.num     2
-hibench.yarn.executor.cores   4
-
-# executor and driver memory in standalone & YARN mode
-spark.executor.memory  4g
-spark.driver.memory    4g
-
-# set spark parallelism property according to hibench's parallelism value
-spark.default.parallelism     ${hibench.default.map.parallelism}
-
-# set spark sql's default shuffle partitions according to hibench's parallelism value
-spark.sql.shuffle.partitions  ${hibench.default.shuffle.parallelism}
-
-spark.driver.extraClassPath     /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar
-spark.executor.extraClassPath   /home/sshuser/alluxio/alluxio-enterprise-1.5.0-E-hdp-2.6/client/spark/alluxio-enterprise-1.5.0-E-spark-client.jar
-```
 
 Configure HiBenchAlluxio to add the libjars
 ```
